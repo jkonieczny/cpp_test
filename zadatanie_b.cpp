@@ -20,8 +20,18 @@ void print_array(string name,int array[],int size);
  */
 int* generate_array(int size);
 
-
+/**
+ * Zadanie 3
+ * wygenerowac tablice z alfabetem A-Z
+ * @param array
+ */
 void generate_alphabet(char* array);
+
+/**
+ * Wyswietl podana liczbe calkowita jako kod binarny
+ * @param x
+ */
+void print_binary(int x);
 
 int main()
 {
@@ -43,7 +53,38 @@ int main()
     for(int i=0;i<ALPHABET_LETTERS;i++){
         cout << (char)C[i] << " ";
     }
+    cout << "\n";
+    
+    
+    // 4
+    int x;
+    cout << "Podaj liczbe calkowita do przekonwertowania: ";
+    cin >> x;
+    print_binary(x);
+    
+    
     return 0;      
+}
+
+void print_binary(int x)
+{
+    string output;
+    
+    cout << "Binary: ";
+    
+    
+    while(x>0){
+        // sprawdz czy ostatni bit jest 'nieparzysty'  np.   0000001 , jesli tak zapisz odpowiednia flage do stringa output
+        output.append( (x&1) == 0 ? "0": "1");
+        //cout << ();
+        // przesun bitowo cala liczbe w prawo, czyli   100111  ->  10011 
+        x >>= 1;
+    }
+    const char*  output_char = output.c_str();
+    for(int i=output.length()-1;i>=0;i--){
+        cout << output_char[i];
+    }
+    cout << "\n";
 }
 
 void generate_alphabet(char* array)
