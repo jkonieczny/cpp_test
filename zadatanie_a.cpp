@@ -33,7 +33,7 @@ inputArrayResult read_from_input(int array[]);
 /**
  *  Porownanie stringow (punkt 4)
  */
-char* str_compare(char* s1, char* s2);
+const char* str_compare(const char* s1,const char* s2);
 
 
 int main()
@@ -41,8 +41,8 @@ int main()
     int A[N];
     int* B;
     inputArrayResult result;
-    char* s1;
-    char* s2;
+    string s1;
+    string s2;
     
     // 1.
     result = read_from_input(A);
@@ -64,9 +64,13 @@ int main()
     cout << "Podaj string, w ktorych chcesz znalezc patter: \n";
     cin >> s2;
     
-    str_compare(s1,s2);
+    const char* found_str = str_compare(s1.c_str(),s2.c_str());
     
-    
+    if( found_str ==  NULL){
+        cout << "Nie znaleziono patternu '"<<s1<<"' w stringu '" << s2 <<"' \n";
+    }else{
+        cout << "Znaleziony string: " << found_str << "\n";
+    }
     delete B;
     B = NULL;
     return 0;      
@@ -147,7 +151,7 @@ void print_array(string name,int array[],int size)
 }
 
 
-char* str_compare(char* s1, char* s2)
+const char* str_compare(const char* s1,const char* s2)
 {
     // return strstr(s1,s2);
     
@@ -157,23 +161,22 @@ char* str_compare(char* s1, char* s2)
     int n = strlen(s2);
 
     int i, j;
-    printf("\nstring : [%s]"
-    "\nlength : [%d]"
-    "\npattern : [%s]"
-    "\nlength : [%d]\n\n", s1,n,s2,m);
-
 
     /* Searching */
     for (j = 0; j <= (n - m); ++j)
     {
+        // cout << "char: "<< s2[j] << "\n";
+        
         for (i = 0; i < m && s1[i] == s2[i + j]; ++i){
-            if (i >= m) {
-                
-                printf("\nMatch found at\n\n->[%d]\n->[%s]\n",j,s2+j);
+            // cout << "s1: " << s1[i] << "  s2: "<< s2[i+j] << " i:" << i << " m:"<< m <<  "\n";
+                    
+            if (i+1 >= m) {
+                // printf("\nZnaleziono pattern na pozycji: \n\n->[%d]\n->[%s]\n",j,s2+j);
                 return &s2[j];
             }
         }
     }
+    //cout << "Nie znaleziono patternu \n";
     return NULL;
 }
 
