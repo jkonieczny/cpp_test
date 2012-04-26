@@ -126,7 +126,7 @@ inputArrayResult read_from_input(int array[])
       int maxIdx = 0;
       int max=array[0];
       // get max:
-      for(int x=1;x<=i;x++){
+      for(int x=1;x<i;x++){
           if(array[x]>max){
              max = array[x];
              maxIdx = x;
