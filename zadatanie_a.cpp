@@ -9,7 +9,7 @@ using namespace std;
  Struktura do zwrocenia wynikow z punktu 1.  - mozna zwrocic tylko 1 wartosc a jest napisane, zeby byla ilosc 
  * wpisanych elementow + index maksymalnego
  */
-class inputArrayResult {
+struct inputArrayResult {
 public:
    int max_idx;
    int size;  
