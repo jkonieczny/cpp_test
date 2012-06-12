@@ -37,8 +37,20 @@ public:
 	/**
 	 *  Przeladowany operator '+'
 	 */
-	friend WektorN& operator+(WektorN &v1, WektorN &v2);
+	friend  WektorN operator+(const WektorN &v1, const WektorN &v2);
 };
+
+ WektorN operator+(const WektorN &v1, const WektorN &v2)
+{
+	if(v1.size != v2.size){
+		throw "Rozmiary podanych wektorow sie nie zgadzaja";
+	}
+	WektorN v(v1.label+ " + " + v2.label,v1.size);
+	for(int i=0;i<v.size;i++){
+		v.ustaw(i,v1.array[i] + v2.array[i]);
+	}
+	return v;
+}
 
 void WektorN::ustaw(int i, int w)
 {
@@ -87,12 +99,25 @@ int main() {
 
 	WektorN v1("pierwszy", 4);
 	WektorN v2("drugi", 7, 10);
-
-	cout << "\n" << v1;
-	cout << "\n" << v2;
+	WektorN v3("trzeci", 4, 8);
+	WektorN  vs = v1+v3;
+	cout << "\nv1: " << v1;
+	cout << "\nv2: " << v2;
+	cout << "\nv3: " << v3;
 	
 	v2.ustaw(3,666);
 	cout << "\nPo ustawieniu wspolrzednej '3' na '666':   " << v2;
+	
+	cout << "\nSuma v1+v3 =  " <<  vs;
+	
+	cout << "\nProbojemy dodac wektory o roznych rozmiarach: \n";
+	
+	try{
+		WektorN vError = v1+v2;
+		cout << "\nSuma v1+v2  (nie powinno tutaj dojsc) =  " <<  vError;
+	}catch(...){
+		cout << "ERROR! Nie mozna dodawac wektorow o roznych rozmiarach!";
+	}
 	
 	
 	cout << "\n";
