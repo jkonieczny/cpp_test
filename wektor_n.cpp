@@ -8,13 +8,43 @@ class WektorN {
     int size;
     
   public:
+     /**
+       * Konstruktor
+       * @param l Label/Etykieta
+       * @param size Wymiar przestrzeni
+       * @param default_value Domysna wartosc wspolrzednych wektora
+       */
     WektorN(string l,int size,int default_value=3);
+   /**
+     * Kontstruktor kopiujacy 
+     * @param v
+     */
+    WektorN(const WektorN &v);
+	/**
+	*  przeladowany operator '<<'
+	*/
     friend ostream& operator<<(ostream &out,WektorN &v);
+	/**
+	* Destruktor
+	*/
+    ~WektorN();
 };
 
+WektorN::~WektorN()
+{
+	delete [] this->array;
+	this->array = NULL;
+	
+}
 
-
-
+WektorN::WektorN(const WektorN& v)
+{
+	this->label = v.label;
+	this->array = new int[v.size];
+	for(int i=0;i<v.size;i++){
+		this->array[i] = v.array[i];
+	}
+}
 
 WektorN::WektorN(string l, int s, int default_value)
 {
