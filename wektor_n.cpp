@@ -5,6 +5,7 @@ using namespace std;
 class WektorN {
     string label;
     int* array;
+    int size;
     
   public:
     WektorN(string l,int size,int default_value=3);
@@ -17,23 +18,22 @@ class WektorN {
 
 WektorN::WektorN(string l, int s, int default_value)
 {
+    this->size = s;
     this->array = new int[s];
     for(int i=0;i<s;i++)
     {
         this->array[i] = default_value;
     }
     this->label = l;
-    cout << ">" << s << "< ";
 }
 
 ostream& operator<<(ostream &out,WektorN &v)
 {
-    out << "||" << sizeof(v.array) << "|| ";
     out <<  v.label + ": [";
-    int s = sizeof(v.array)/sizeof(int);
-    for(int i=0;i< s;i++){
+   
+    for(int i=0;i< v.size;i++){
         out << v.array[i];
-        if(i<s-1){
+        if(i<v.size-1){
             out << ",";
         }
     }
